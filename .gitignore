@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+models/
+outputs/
+.ipynb_checkpoints/
+.cache/
+._____temp/
+*.downloading
+.vscode/
+.idea/
+build/
+dist/
