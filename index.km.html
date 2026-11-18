@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio0808 VoxCPM សៀវភៅណែនាំប្រើប្រាស់កម្មវិធីសំយោគសំឡេង AI</title>
+    <link rel="icon" href="app.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="app.ico" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Khmer:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0f12;
+            --sidebar-color: #15181f;
+            --card-color: #1e222b;
+            --border-color: #2e3545;
+            --text-main: #f0f2f5;
+            --text-muted: #9ba3b4;
+            --primary: #9c27b0;
+            --primary-hover: #7b1fa2;
+            --accent-blue: #2196f3;
+            --accent-green: #4caf50;
+            --accent-orange: #ff9800;
+            --accent-pink: #e91e63;
+            --font-family: 'Leelawadee UI', 'Noto Sans Khmer', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            --title-gradient-start: #ffffff;
+            --title-gradient-end: #90a4ae;
+            --logo-text-start: #ffffff;
+            --logo-text-end: #b0bec5;
+            --code-block-bg: #08090c;
+            --code-block-text: #b0bec5;
+            --step-num-bg: rgba(255, 255, 255, 0.08);
+            --table-hdr-bg: rgba(255, 255, 255, 0.03);
+            --hover-overlay: rgba(255, 255, 255, 0.02);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f6f8fa;
+            --sidebar-color: #ffffff;
+            --card-color: #ffffff;
+            --border-color: #dcdfe4;
+            --text-main: #1f2328;
+            --text-muted: #656d76;
+            --primary: #9c27b0;
+            --primary-hover: #7b1fa2;
+            --accent-blue: #0969da;
+            --accent-green: #1a7f37;
+            --accent-orange: #bc4c00;
+            --accent-pink: #bf3b6c;
+            
+            --title-gradient-start: #1f2328;
+            --title-gradient-end: #57606a;
+            --logo-text-start: #1f2328;
+            --logo-text-end: #57606a;
+            --code-block-bg: #f6f8fa;
+            --code-block-text: #24292f;
+            --step-num-bg: rgba(0, 0, 0, 0.06);
+            --table-hdr-bg: rgba(0, 0, 0, 0.03);
+            --hover-overlay: rgba(0, 0, 0, 0.02);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            display: flex;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        .sidebar {
+            width: 290px;
+            background-color: var(--sidebar-color);
+            border-right: 1px solid var(--border-color);
+            padding: 24px 16px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-left: 8px;
+        }
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-blue));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 18px;
+        }
+        .logo-text {
+            font-size: 16px;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--logo-text-start), var(--logo-text-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu { list-style: none; padding: 0; margin: 0; }
+        .nav-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin: 16px 0 8px 12px;
+            font-weight: 600;
+        }
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        .nav-item a:hover {
+            color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .nav-item.active a {
+            color: white;
+            background-color: var(--primary);
+            font-weight: 500;
+        }
+
+        .main-content {
+            margin-left: 290px;
+            flex: 1;
+            padding: 40px 60px;
+            max-width: 1000px;
+        }
+
+        header {
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 24px;
+        }
+        .version-badge {
+            display: inline-block;
+            background-color: rgba(156, 39, 176, 0.15);
+            color: #ba68c8;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            border: 1px solid rgba(156, 39, 176, 0.3);
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            background: linear-gradient(90deg, var(--title-gradient-start), var(--title-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        section { margin-bottom: 50px; scroll-margin-top: 24px; }
+        h2 {
+            font-size: 21px;
+            font-weight: 600;
+            margin: 0 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h3 { font-size: 17px; font-weight: 600; margin: 24px 0 12px 0; }
+
+        .callout {
+            background-color: var(--card-color);
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+        .callout.tip { border-left-color: var(--accent-blue); background-color: rgba(33, 150, 243, 0.05); }
+        .callout.warning { border-left-color: var(--accent-pink); background-color: rgba(233, 30, 99, 0.05); }
+        .callout-title { font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+
+        .step-list { display: flex; flex-direction: column; gap: 16px; margin: 20px 0; }
+        .step-item {
+            display: flex;
+            gap: 16px;
+            background-color: var(--card-color);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .step-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: var(--step-num-bg);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .step-text h4 { margin: 0 0 6px 0; font-size: 15px; }
+        .step-text p { margin: 0; font-size: 14px; color: var(--text-muted); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--card-color);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        th, td { padding: 12px 16px; text-align: left; font-size: 14px; border-bottom: 1px solid var(--border-color); }
+        th { background-color: var(--table-hdr-bg); font-weight: 600; }
+        
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Language Switcher Bar -->
+    <div style="position: fixed; top: 20px; right: 75px; z-index: 1000; display: flex; gap: 8px; background: var(--card-color); border: 1px solid var(--border-color); padding: 5px 12px; border-radius: 20px; font-size: 13px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+        <a href="index.en.html" style="color: var(--text-muted); text-decoration: none; font-weight: 500;">English</a>
+        <span style="color: var(--border-color);">|</span>
+        <span style="color: var(--primary); font-weight: bold;">ភាសាខ្មែរ</span>
+        <span style="color: var(--border-color);">|</span>
+        <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-weight: 500;">繁體中文</a>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+        <span class="toggle-icon">☀️</span>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo-area">
+            <div class="logo-icon">V</div>
+            <div class="logo-text">Studio0808 VoxCPM</div>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-title">ការណែនាំរហ័ស</li>
+            <li class="nav-item active"><a href="#quick-start">🚀 ការចាប់ផ្តើម និងទាញយក</a></li>
+            <li class="nav-item"><a href="#voice-record">🎤 បន្ទប់ថតសំឡេងផ្ទាល់</a></li>
+            <li class="nav-item"><a href="#voice-design">✨ ការរចនាសំឡេង</a></li>
+            <li class="nav-item"><a href="#voice-clone">👥 ការក្លូនសំឡេង</a></li>
+            <li class="nav-item"><a href="#ultimate-clone">👑 ការក្លូនកម្រិតខ្ពស់</a></li>
+            <li class="nav-title">ការកំណត់</li>
+            <li class="nav-item"><a href="#parameters">⚙️ ប៉ារ៉ាម៉ែត្រកម្រិតខ្ពស់</a></li>
+            <li class="nav-title">សំណួរ និងជំនួយ</li>
+            <li class="nav-item"><a href="#faq">❓ សំណួរញឹកញាប់ (FAQ)</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <header>
+            <div class="version-badge">កំណែ V20260619 (ពហុភាសា / Multilingual)</div>
+            <h1>Studio0808 VoxCPM កម្មវិធីសំយោគសំឡេង AI</h1>
+            <div class="subtitle">ដំណើរការដោយម៉ូដែលកូដចំហ VoxCPM2 របស់ OpenBMB បង្កើតឡើងដើម្បីផ្តល់នូវការក្លូនសំឡេង និងសំយោគសំឡេងកម្រិតស្ទូឌីយោដោយមិនបាច់ប្រើអ៊ីនធឺណិត។</div>
+        </header>
+
+        <!-- Quick Start -->
+        <section id="quick-start">
+            <h2>🚀 ការចាប់ផ្តើមរហ័ស និងការទាញយកម៉ូដែល</h2>
+            
+            <div class="callout tip">
+                <div class="callout-title">📦 កម្មវិធីលើ Windows ដំណើរការក្រៅបណ្តាញ (Offline)</div>
+                <p>ទាញយកពន្លា និងដំណើរការបានភ្លាមៗដោយមិនបាច់ដំឡើង Python ស្មុគស្មាញឡើយ។ ម៉ូដែលទំហំ 4.6GB អាចទាញយកដោយស្វ័យប្រវត្តិតាមរយៈផ្ទាំង «ការកំណត់»។</p>
+            </div>
+
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">
+                        <h4>ទាញយកម៉ូដែលក្នុងផ្ទាំង «ការកំណត់»</h4>
+                        <p>ចូលទៅកាន់ផ្ទាំង <strong>«ការកំណត់» (Settings)</strong> ជ្រើសរើសប្រភព Hugging Face ឬ ModelScope រួចចុច <strong>«ចាប់ផ្តើមទាញយក / ពិនិត្យម៉ូដែល»</strong>។</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">
+                        <h4>ជ្រើសរើសមុខងារសំយោគសំឡេង</h4>
+                        <p>ជ្រើសរើស <strong>រចនាសំឡេង (Voice Design)</strong>, <strong>ក្លូនសំឡេង (Voice Clone)</strong> ឬ <strong>ក្លូនកម្រិតខ្ពស់ (Ultimate Clone)</strong> ទៅតាមតម្រូវការរបស់អ្នក។</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text">
+                        <h4>ចាប់ផ្តើមសំយោគ និងចាក់សំឡេង</h4>
+                        <p>បញ្ចូលអត្ថបទដែលអ្នកចង់ឱ្យនិយាយ ចុចប៊ូតុងពណ៌ផ្កាឈូក <strong>«🚀 ចាប់ផ្តើមសំយោគសំឡេង»</strong>។ នៅពេលរួចរាល់ ចុចប៊ូតុងពណ៌បៃតង <strong>«▶ ចាក់សំឡេង»</strong> ដើម្បីស្តាប់!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Recording -->
+        <section id="voice-record">
+            <h2>🎤 បន្ទប់ថតសំឡេងផ្ទាល់ (Live Recording)</h2>
+            <p>ថតសំឡេងរបស់អ្នកផ្ទាល់នៅលើកុំព្យូទ័រ ដើម្បីសាកល្បងមុខងារក្លូនសំឡេងបានភ្លាមៗ។</p>
+            <ul>
+                <li><strong>ស្កេនមីក្រូហ្វូន</strong>៖ រកឃើញ និងជ្រើសរើសមីក្រូហ្វូនទាំងអស់ក្នុងប្រព័ន្ធដោយស្វ័យប្រវត្តិ។</li>
+                <li><strong>រលកសំឡេងពណ៌ផ្កាឈូក</strong>៖ បង្ហាញចលនារលកសំឡេងជាក់ស្តែង ដើម្បីដឹងថាមីក្រូហ្វូនកំពុងចាប់សំឡេងបានល្អ។</li>
+                <li><strong>ប្រើប្រាស់ដោយចុចម្តង</strong>៖ បញ្ជូនសំឡេងដែលទើបថតរួចទៅកាន់មុខងារ ក្លូនសំឡេង ឬ ក្លូនកម្រិតខ្ពស់ ដោយមិនបាច់រកឯកសារ។</li>
+            </ul>
+        </section>
+
+        <!-- Voice Design -->
+        <section id="voice-design">
+            <h2>✨ ការរចនាសំឡេង (Voice Design)</h2>
+            <p>បង្កើតសំឡេងថ្មីដោយមិនបាច់មានសំឡេងយោង ដោយគ្រាន់តែបន្ថែមការពណ៌នាក្នុងវង់ក្រចកនៅដើមអត្ថបទ៖</p>
+            <div class="callout tip">
+                <code>(A young woman, Cambodian accent, gentle and sweet voice) សួស្តី! សូមស្វាគមន៍មកកាន់កម្មវិធីសំយោគសំឡេង AI។</code><br>
+                <code>(An elderly man, Cambodian Khmer accent, deep and warm voice) សួស្តីកូនចៅទាំងអស់គ្នា។</code><br>
+                <code>(A gentle young female voice, smiling) Hello, welcome to the speech workstation!</code>
+            </div>
+            <h3>សំយោគជាបាច់ (សម្រាប់សៀវភៅជាសំឡេង / Audiobook)</h3>
+            <p>បិទភ្ជាប់អត្ថបទមួយជួរមួយប្រយោគ រួចចុច <strong>«📋 សំយោគជាបាច់»</strong> ដើម្បីឱ្យប្រព័ន្ធបង្កើតឯកសារសំឡេង WAV តាមជួរនីមួយៗដោយស្វ័យប្រវត្តិ។</p>
+        </section>
+
+        <!-- Voice Clone -->
+        <section id="voice-clone">
+            <h2>👥 ការក្លូនសំឡេង (Voice Clone)</h2>
+            <p>ចម្លងសំឡេង អារម្មណ៍ និងទឹកដមសំនៀងរបស់អ្នកនិយាយ ដោយប្រើតែសំឡេងយោងច្បាស់ពី <strong>៣ ទៅ ១០ វិនាទី</strong> ប៉ុណ្ណោះ។</p>
+        </section>
+
+        <!-- Ultimate Clone -->
+        <section id="ultimate-clone">
+            <h2>👑 ការក្លូនកម្រិតខ្ពស់ (Ultimate Clone)</h2>
+            <p>ផ្តល់ទាំងឯកសារសំឡេងយោង និងអត្ថបទដើមនៃសំឡេងនោះ។ ម៉ូដែលនឹងបន្តការនិយាយអត្ថបទថ្មីរបស់អ្នកដោយរក្សាអារម្មណ៍ ចង្វាក់ដកដង្ហើម និងទឹកដមសំនៀងដើមបានយ៉ាងរលូន ១០០%។</p>
+        </section>
+
+        <!-- Parameters -->
+        <section id="parameters">
+            <h2>⚙️ ប៉ារ៉ាម៉ែត្រកម្រិតខ្ពស់</h2>
+            <table>
+                <thead>
+                    <tr><th>ប៉ារ៉ាម៉ែត្រ</th><th>លំនាំដើម</th><th>ការពិពណ៌នា</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>CFG Scale</strong></td><td>2.0</td><td>មេគុណណែនាំ។ តម្លៃទាប (1.5-2.5) ផ្តល់សំឡេងធម្មជាតិល្អ; តម្លៃខ្ពស់អនុវត្តតាមការពណ៌នាកាន់តែខ្លាំង។</td></tr>
+                    <tr><td><strong>Steps</strong></td><td>10</td><td>ជំហានកាត់បន្ថយសំឡេងរំខាន។ 10-15 ជំហានគឺជាកម្រិតល្អបំផុតរវាងល្បឿន និងគុណភាព។</td></tr>
+                    <tr><td><strong>Speed</strong></td><td>1.0x</td><td>កែសម្រួលល្បឿននិយាយ (0.5x យឺត - 2.0x លឿន)។</td></tr>
+                    <tr><td><strong>Seed</strong></td><td>ចៃដន្យ</td><td>ធីកលើ «ប្រើគ្រាប់ពូជចៃដន្យថេរ» ដើម្បីចាក់សោរ timbre របស់សំឡេង។</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+            <h2>❓ សំណួរញឹកញាប់ (FAQ)</h2>
+            <h3>សំណួរ៖ តើអាចប្តូរភាសាកម្មវិធីបានយ៉ាងដូចម្តេច?</h3>
+            <p>អ្នកអាចប្តូររវាង <strong>ភាសាខ្មែរ (Khmer)</strong>, <strong>English (អង់គ្លេស)</strong> និង <strong>繁體中文 (ចិន)</strong> បានគ្រប់ពេលតាមរយៈម៉ឺនុយជ្រើសរើសភាសានៅជ្រុងខាងឆ្វេងផ្នែកខាងក្រោមនៃផ្ទាំងកម្មវិធី!</p>
+        </section>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const target = current === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', target);
+            themeToggle.querySelector('.toggle-icon').textContent = target === 'light' ? '🌙' : '☀️';
+        });
+    </script>
+</body>
+</html>

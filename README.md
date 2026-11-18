@@ -1,12 +1,33 @@
-**English** | [繁體中文](README.zh-TW.md)
+**English** | [ភាសាខ្មែរ](README.km.md) | [繁體中文](README.zh-TW.md)
 
 # 🎙️ Studio0808 VoxCPM — AI Text-to-Speech Workstation
 
 ![GitHub License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
 ![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-windows-lightgrey.svg)
+![Languages](https://img.shields.io/badge/UI_Languages-English%20%7C%20ភាសាខ្មែរ%20%7C%20繁體中文-orange.svg)
 
-An offline desktop GUI application built on top of OpenBMB's state-of-the-art **VoxCPM2** — a 2-billion-parameter open-source text-to-speech large language model. It bundles voice design, voice cloning, ultimate cloning, and a built-in live recording studio into one tool, so you can experience high-quality AI speech synthesis on your Windows PC without writing a single line of code.
+An offline desktop GUI workstation built on top of OpenBMB's state-of-the-art **VoxCPM2** — a 2-billion-parameter open-source text-to-speech large language model. It bundles voice design, voice cloning, ultimate cloning, and a built-in live recording studio into one tool with full multilingual UI support for **English**, **Khmer (ភាសាខ្មែរ)**, and **Traditional Chinese (繁體中文)**.
+
+---
+
+## 🌐 Multilingual UI (English, Khmer, Chinese)
+
+Switch interface language dynamically anytime from the bottom-left sidebar:
+* **English** — Native interface with standard international presets.
+* **ភាសាខ្មែរ (Khmer)** — Full Khmer interface with native Leelawadee UI font rendering and dedicated Cambodian voice design presets.
+* **繁體中文 (Traditional Chinese)** — Original traditional Chinese workstation UI.
+
+Direct launchers available:
+```bash
+# Launch in English
+python Studio0808_VoxCPM.py --lang en
+# or run: run_english.bat
+
+# Launch in Khmer (ភាសាខ្មែរ)
+python Studio0808_VoxCPM.py --lang km
+# or run: run_khmer.bat
+```
 
 ---
 

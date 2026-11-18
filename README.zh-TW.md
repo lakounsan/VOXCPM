@@ -1,12 +1,28 @@
-[English](README.md) | **繁體中文**
+[English](README.md) | [ភាសាខ្មែរ](README.km.md) | **繁體中文**
 
 # 🎙️ Studio0808 VoxCPM 語音合成工作站
 
 ![GitHub License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
 ![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-windows-lightgrey.svg)
+![Languages](https://img.shields.io/badge/UI_Languages-English%20%7C%20ភាសាខ្មែរ%20%7C%20繁體中文-orange.svg)
 
-本專案是基於 OpenBMB 最新開源的 20 億參數語音合成大模型 **VoxCPM2** 所開發的離線桌面 GUI 應用程式。整合了語音設計、聲音複製、極限複製，並配有現場即時錄音測試功能，讓使用者無需撰寫程式碼即可在 Windows 電腦上體驗高品質的 AI 語音生成。
+本專案是基於 OpenBMB 最新開源的 20 億參數語音合成大模型 **VoxCPM2** 所開發的離線桌面 GUI 應用程式。現已支援**英文 (English)**、**高棉語/柬埔寨語 (ភាសាខ្មែរ)** 與**繁體中文**多語言介面切換。整合了語音設計、聲音複製、極限複製，並配有現場即時錄音測試功能，讓使用者無需撰寫程式碼即可在 Windows 電腦上體驗高品質的 AI 語音生成。
+
+---
+
+## 🌐 多語系介面切換 (English, ភាសាខ្មែរ, 繁體中文)
+
+於程式左側側邊欄底部，隨時一鍵無縫切換介面語言：
+* **English**：全英文介面與國際音色快速範本。
+* **ភាសាខ្មែរ (Khmer)**：完整高棉語介面，針對 Windows Leelawadee UI 字型最佳化渲染，並提供柬埔寨語專屬語音設計範本。
+* **繁體中文**：原生繁體中文操作介面。
+
+亦可使用命令列或捷徑腳本直接啟動：
+```bash
+python Studio0808_VoxCPM.py --lang en   # 英文介面 (或點擊 run_english.bat)
+python Studio0808_VoxCPM.py --lang km   # 高棉語介面 (或點擊 run_khmer.bat)
+```
 
 ---
 

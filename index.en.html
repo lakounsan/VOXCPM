@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio0808 VoxCPM Speech Synthesis Workstation - User Guide</title>
+    <link rel="icon" href="app.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="app.ico" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0f12;
+            --sidebar-color: #15181f;
+            --card-color: #1e222b;
+            --border-color: #2e3545;
+            --text-main: #f0f2f5;
+            --text-muted: #9ba3b4;
+            --primary: #9c27b0;
+            --primary-hover: #7b1fa2;
+            --accent-blue: #2196f3;
+            --accent-green: #4caf50;
+            --accent-orange: #ff9800;
+            --accent-pink: #e91e63;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            
+            --title-gradient-start: #ffffff;
+            --title-gradient-end: #90a4ae;
+            --logo-text-start: #ffffff;
+            --logo-text-end: #b0bec5;
+            --code-block-bg: #08090c;
+            --code-block-text: #b0bec5;
+            --step-num-bg: rgba(255, 255, 255, 0.08);
+            --table-hdr-bg: rgba(255, 255, 255, 0.03);
+            --hover-overlay: rgba(255, 255, 255, 0.02);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f6f8fa;
+            --sidebar-color: #ffffff;
+            --card-color: #ffffff;
+            --border-color: #dcdfe4;
+            --text-main: #1f2328;
+            --text-muted: #656d76;
+            --primary: #9c27b0;
+            --primary-hover: #7b1fa2;
+            --accent-blue: #0969da;
+            --accent-green: #1a7f37;
+            --accent-orange: #bc4c00;
+            --accent-pink: #bf3b6c;
+            
+            --title-gradient-start: #1f2328;
+            --title-gradient-end: #57606a;
+            --logo-text-start: #1f2328;
+            --logo-text-end: #57606a;
+            --code-block-bg: #f6f8fa;
+            --code-block-text: #24292f;
+            --step-num-bg: rgba(0, 0, 0, 0.06);
+            --table-hdr-bg: rgba(0, 0, 0, 0.03);
+            --hover-overlay: rgba(0, 0, 0, 0.02);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            display: flex;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-color);
+            border-right: 1px solid var(--border-color);
+            padding: 24px 16px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-left: 8px;
+        }
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-blue));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 18px;
+        }
+        .logo-text {
+            font-size: 16px;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--logo-text-start), var(--logo-text-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu { list-style: none; padding: 0; margin: 0; }
+        .nav-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin: 16px 0 8px 12px;
+            font-weight: 600;
+        }
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        .nav-item a:hover {
+            color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .nav-item.active a {
+            color: white;
+            background-color: var(--primary);
+            font-weight: 500;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 40px 60px;
+            max-width: 1000px;
+        }
+
+        header {
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 24px;
+        }
+        .version-badge {
+            display: inline-block;
+            background-color: rgba(156, 39, 176, 0.15);
+            color: #ba68c8;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            border: 1px solid rgba(156, 39, 176, 0.3);
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+            background: linear-gradient(90deg, var(--title-gradient-start), var(--title-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        section { margin-bottom: 50px; scroll-margin-top: 24px; }
+        h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h3 { font-size: 17px; font-weight: 600; margin: 24px 0 12px 0; }
+
+        .callout {
+            background-color: var(--card-color);
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+        .callout.tip { border-left-color: var(--accent-blue); background-color: rgba(33, 150, 243, 0.05); }
+        .callout.warning { border-left-color: var(--accent-pink); background-color: rgba(233, 30, 99, 0.05); }
+        .callout-title { font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+
+        .step-list { display: flex; flex-direction: column; gap: 16px; margin: 20px 0; }
+        .step-item {
+            display: flex;
+            gap: 16px;
+            background-color: var(--card-color);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .step-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: var(--step-num-bg);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .step-text h4 { margin: 0 0 6px 0; font-size: 15px; }
+        .step-text p { margin: 0; font-size: 14px; color: var(--text-muted); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--card-color);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        th, td { padding: 12px 16px; text-align: left; font-size: 14px; border-bottom: 1px solid var(--border-color); }
+        th { background-color: var(--table-hdr-bg); font-weight: 600; }
+        
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Language Switcher Bar -->
+    <div style="position: fixed; top: 20px; right: 75px; z-index: 1000; display: flex; gap: 8px; background: var(--card-color); border: 1px solid var(--border-color); padding: 5px 12px; border-radius: 20px; font-size: 13px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+        <span style="color: var(--primary); font-weight: bold;">English</span>
+        <span style="color: var(--border-color);">|</span>
+        <a href="index.km.html" style="color: var(--text-muted); text-decoration: none; font-weight: 500;">ភាសាខ្មែរ</a>
+        <span style="color: var(--border-color);">|</span>
+        <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-weight: 500;">繁體中文</a>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+        <span class="toggle-icon">☀️</span>
+    </button>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo-area">
+            <div class="logo-icon">V</div>
+            <div class="logo-text">Studio0808 VoxCPM</div>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-title">Quick Guide</li>
+            <li class="nav-item active"><a href="#quick-start">🚀 Quick Start & Download</a></li>
+            <li class="nav-item"><a href="#dist-pkg">📦 Packaging & Distribution</a></li>
+            <li class="nav-item"><a href="#mac-support">🍎 macOS Support Notes</a></li>
+            <li class="nav-title">Core Features</li>
+            <li class="nav-item"><a href="#voice-record">🎤 Live Voice Recording</a></li>
+            <li class="nav-item"><a href="#voice-design">✨ Voice Design</a></li>
+            <li class="nav-item"><a href="#voice-clone">👥 Voice Clone</a></li>
+            <li class="nav-item"><a href="#ultimate-clone">👑 Ultimate Clone</a></li>
+            <li class="nav-title">Configuration</li>
+            <li class="nav-item"><a href="#parameters">⚙️ Advanced Parameters</a></li>
+            <li class="nav-title">Reference</li>
+            <li class="nav-item"><a href="#use-cases">💡 Best Practices & Limits</a></li>
+            <li class="nav-item"><a href="#faq">❓ Frequently Asked Questions</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <header>
+            <div class="version-badge">Version V20260619 (Multilingual)</div>
+            <h1>Studio0808 VoxCPM AI Speech Workstation</h1>
+            <div class="subtitle">An offline desktop AI speech workstation powered by OpenBMB VoxCPM2, delivering ultra-realistic voice cloning and expressive speech generation.</div>
+        </header>
+
+        <!-- Quick Start -->
+        <section id="quick-start">
+            <h2>🚀 Quick Start & Model Deployment</h2>
+            
+            <div class="callout tip" style="display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+                <div>
+                    <div class="callout-title">📦 Workstation Package (Portable Windows Release)</div>
+                    <p style="margin: 5px 0 0 0; font-size: 14px; color: var(--text-muted);">Unzip and run directly on Windows without configuring Python. Model weights can be downloaded with 1-click inside the app Settings tab.</p>
+                </div>
+                <a href="https://drive.google.com/file/d/1ju5Ih5ui3GYcydF3jFRaVZmk-T6kPEMa/view?usp=sharing" target="_blank" style="padding: 10px 20px; background-color: var(--accent-green); color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px;">📥 Cloud Download</a>
+            </div>
+
+            <p>This tool runs 100% offline. On first use, download the model weights (~4.6GB). Follow these simple steps:</p>
+            
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">
+                        <h4>Download & Verify Model in Settings</h4>
+                        <p>Go to the <strong>Settings</strong> tab. Select a mirror (Hugging Face Official, Mirror, or ModelScope), then click <strong>"Start Download / Check Model"</strong>. The downloader supports HTTP Range resume and auto-retry.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">
+                        <h4>Choose Speech Generation Mode</h4>
+                        <p>Choose <strong>Voice Design</strong> (no reference audio), <strong>Voice Clone</strong> (3-10s reference audio), or <strong>Ultimate Clone</strong> (reference audio + transcript).</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text">
+                        <h4>Synthesize & Play Audio</h4>
+                        <p>Type your text, click the pink <strong>"🚀 Start Speech Synthesis"</strong> button. Once generated, click the green <strong>"▶ Play Audio"</strong> button to listen!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Recording -->
+        <section id="voice-record">
+            <h2>🎤 Live Voice Recording Studio</h2>
+            <p>Record your voice directly on your PC to immediately test voice cloning features.</p>
+            <ul>
+                <li><strong>Microphone Detection</strong>: Select any system microphone with real-time refresh.</li>
+                <li><strong>Pink Ripple Waveform</strong>: Real-time visual feedback confirms your mic is capturing sound.</li>
+                <li><strong>One-Click Apply</strong>: Directly applies your recording to Voice Clone or Ultimate Clone with prompt text.</li>
+            </ul>
+        </section>
+
+        <!-- Voice Design -->
+        <section id="voice-design">
+            <h2>✨ Voice Design (Create from Scratch)</h2>
+            <p>Generate unique character voices without reference audio by describing vocal qualities in parentheses:</p>
+            <div class="callout tip">
+                <code>(A gentle young female voice, smiling) Hello and welcome to VoxCPM!</code><br>
+                <code>(An old man, deep American accent, calm) It is quiet tonight.</code><br>
+                <code>(A young woman, Cambodian accent, gentle and sweet voice) សួស្តី! នេះគឺជាសំឡេងដែលបង្កើតឡើងដោយ AI។</code>
+            </div>
+            <h3>Batch Synthesis (Audiobook Mode)</h3>
+            <p>Paste text line-by-line (one sentence per line). Click <strong>"📋 Batch Synthesis"</strong> to sequentially generate every sentence into separate high-quality WAV files.</p>
+        </section>
+
+        <!-- Voice Clone -->
+        <section id="voice-clone">
+            <h2>👥 Voice Clone (Fast Replication)</h2>
+            <p>Replicates tone, emotion, and timbre using only <strong>3 to 10 seconds</strong> of clean reference voice. Ideal length: 5–8 seconds without background music.</p>
+        </section>
+
+        <!-- Ultimate Clone -->
+        <section id="ultimate-clone">
+            <h2>👑 Ultimate Clone (Seamless Continuation)</h2>
+            <p>Provide both reference audio and its exact spoken transcript. The model seamlessly continues speaking your target text with 100% emotional continuity, natural breathing, and identical acoustic timbre.</p>
+        </section>
+
+        <!-- Parameters -->
+        <section id="parameters">
+            <h2>⚙️ Advanced Parameters</h2>
+            <table>
+                <thead>
+                    <tr><th>Parameter</th><th>Default</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>CFG Scale</strong></td><td>2.0</td><td>Guidance scale. Lower (1.5-2.5) yields smoother natural speech; higher adheres more strictly to descriptions.</td></tr>
+                    <tr><td><strong>Steps</strong></td><td>10</td><td>Denoising steps. 10-15 steps is optimal for speed and acoustic clarity.</td></tr>
+                    <tr><td><strong>Speed</strong></td><td>1.0x</td><td>Adjusts speech playback speed (0.5x to 2.0x).</td></tr>
+                    <tr><td><strong>Seed</strong></td><td>Random</td><td>Check "Use Fixed Random Seed" and enter an integer to lock a specific speaker identity.</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+            <h2>❓ Frequently Asked Questions</h2>
+            <h3>Q: What languages are supported?</h3>
+            <p>VoxCPM2 supports over 30 languages including English, Khmer, Mandarin, Cantonese, Japanese, Korean, Spanish, French, and German.</p>
+            <h3>Q: How to switch interface languages?</h3>
+            <p>Use the language dropdown at the bottom of the left sidebar to toggle between <strong>English</strong>, <strong>ភាសាខ្មែរ (Khmer)</strong>, and <strong>繁體中文 (Traditional Chinese)</strong> anytime!</p>
+        </section>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const target = current === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', target);
+            themeToggle.querySelector('.toggle-icon').textContent = target === 'light' ? '🌙' : '☀️';
+        });
+    </script>
+</body>
+</html>
